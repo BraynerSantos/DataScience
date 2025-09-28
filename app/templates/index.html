@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surface Roughness Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f9f9f9;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+            max-width: 420px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 95%;
+            padding: 8px;
+            margin: 4px 0;
+            -moz-appearance: textfield;  /* remove arrows in Firefox */
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none; /* remove arrows in Chrome, Safari, Edge */
+            margin: 0;
+        }
+        small {
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="center">Surface Roughness (Ra) Prediction</h2>
+    <form method="POST">
+        <label>Tool Wear</label>
+        <small>Range: 0 – .3 mm</small>
+        <input type="number" step="any" name="Tool_Wear" min="0" max="0.3" required>
+
+        <label>Depth of Cut (ap)</label>
+        <small>Range: 0.25 – .8 mm</small>
+        <input type="number" step="any" name="Depth_of_Cut_ap" min="0.25" max=".8" required>
+
+        <label>Cutting Speed (vc)</label>
+        <small>Range: 310 – 390 m/min</small>
+        <input type="number" step="any" name="Cutting_Speed_vc" min="310" max="390" required>
+
+        <label>Feed Rate (f)</label>
+        <small>Range: 0.07 – .13 mm/rev</small>
+        <input type="number" step="any" name="Feed_Rate_f" min="0.07" max=".13" required>
+
+        <label>Resultant Force </label>
+        <small>Range: 69.33 – 384 N</small>
+        <input type="number" step="any" name="Resultant_Force" min="69.33" max="384" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h3>Predicted Ra: {{ prediction }}</h3>
+    </div>
+    {% endif %}
+</body>
+</html>
